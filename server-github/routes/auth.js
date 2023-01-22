@@ -132,6 +132,20 @@ router.put("/:id/update", async (req, res) => {
 
 
 // Delete user
+router.delete("/:id/delete", async (req, res) => {
+  try {
+    const User=mongoose.model(req.params.id,WebsiteusersSchema);
+    const user=await User.findByIdAndDelete(req.body.id);
+    const date=Date.now();
+    await web.findByIdAndUpdate(req.params.id,{
+      $push:{"apiAccessRecord":{function:"delete",user:user.email,time:date,status:"success"}}
+    },{new:true});
+    res.status(200).json("User has been deleted...");
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 
 
 
