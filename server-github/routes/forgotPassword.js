@@ -35,12 +35,12 @@ router.post("/:id/sendmail", async (req, res) => {
         expiresIn: "5m",
         
       });
-      const link = `http://localhost:3000/reset-password/${website._id}/${website.websitename}/${oldUser._id}/${token}`;
+      const link = `http://baas-password-reset/reset-password/${website._id}/${website.websitename}/${oldUser._id}/${token}`;
       var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "adarsh438tcsckandivali@gmail.com",
-          pass: "rmdklolcsmswvyfw",
+          user: "rr.corpration@gmail.com",
+          pass: "21022003@rahul",
         },
       });
   
@@ -48,7 +48,7 @@ router.post("/:id/sendmail", async (req, res) => {
         from: "youremail@gmail.com",
         to: "rahulearth2003@gmail.com",
         subject: "Password Reset",
-        text: link,
+        text: `Hi ${oldUser.username}! \n\n Please click on the following link ${link} to reset your password. \n\n If you did not request this, please ignore this email and your password will remain unchanged.\n`,
       };
   
       transporter.sendMail(mailOptions, function (error, info) {
@@ -121,25 +121,25 @@ router.post("/sendmail", async (req, res) => {
       expiresIn: "15m",
       
     });
-    const link = `http://localhost:3000/reset-password/${oldUser._id}/${token}`;
+    const link = `http://baas-password-reset.netlify.app/reset-password/${oldUser._id}/${token}`;
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "adarsh438tcsckandivali@gmail.com",
-        pass: "rmdklolcsmswvyfw",
+        user: "rr.corpration@gmail.com",
+        pass: "ubordgwetizuaant",
       },
     });
 
     var mailOptions = {
-      from: "youremail@gmail.com",
-      to: "rahulearth2003@gmail.com",
+      from: "no-reply@gmail.com",
+      to: email,
       subject: "Password Reset",
-      text: link,
+      text: `Hi ${oldUser.username}! \n\n Please click on the following link ${link} to reset your password. \n\n If you did not request this, please ignore this email and your password will remain unchanged.\n`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        res.status(500).json(link);
+        res.status(500).json(error.message);
       } else {
         res.status(201).json( info.response);
       }
