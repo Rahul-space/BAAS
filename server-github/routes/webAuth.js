@@ -67,8 +67,47 @@ router.post("/login", async (req, res) => {
 
 
 
-//Forgot Password
 
+router.get("/confidential/users", async (req, res) => {
+    try {
+      const users = await User.find();
+      res.status(200).json(users);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
+router.get("/confidential/users/:id", async (req, res) => {
+  try {
+    const users = await User.findById(req.params.id);
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+//UPDATE
+router.put("/confidential/users/:id", async (req, res) => {
+  try {
+    const users = await User.findByIdAndUpdate(req.params.id, {
+      $set: req.body,
+    });
+    res.status(200).json("Account has been updated");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//delete
+router.delete("/confidential/users/:id", async (req, res) => {
+  try {
+    const users = await User.findByIdAndDelete(req.params.id);
+    res.status(200).json("Account has been deleted");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 // routes.delete('/', SessionController.store);
