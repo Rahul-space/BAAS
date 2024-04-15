@@ -18,7 +18,7 @@ const corsOptions ={
 app.use(cors(corsOptions))
 mongoose.set("strictQuery", false);
 mongoose
-  .connect("mongodb+srv://Rahul:21022003@bass-rr.s5vndgq.mongodb.net/?retryWrites=true&w=majority", {
+  .connect("connection string", {
   })
   .then(() => console.log("DB Connection Successfull"))
   .catch((err) => {
