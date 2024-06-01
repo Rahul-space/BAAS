@@ -6,9 +6,12 @@ current Features
  - Able to edit their datas 
  - users can utilze the authentication system in their app
  - Forget password mail and sms method can be altered according to the user
+
+
 Planned Features: 
  - website configuration ability 
  - improving data visualization
+
 
 Updates and ideas are welcomed
 
